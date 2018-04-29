@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html ng-app="application">
+    <head>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->  
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->  
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->  
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+
+
+<script src="js/realfb.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    </head>
+    <body>
+        <div class="limiter">
+             <div class="container-login100" style="background-image: url('images/bg.jpg');">
+                <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                    <span class="login100-form-title p-b-53">
+                            TRAINMASTER
+                        </span>
+                        <div ng-controller="app" align="center">
+<!-- passenger page-->
+                            <div id="coco" style="display: none">
+                                    <span id ="passName"class="login100-form-title p-b-53">      
+                                    </span>
+                                    <div align="center" class="p-b-33" >
+                                        <select class="btn btn-sm animated-button victoria-one">
+                                          <option value="none">---START---</option>
+                                          <option value="Siam">Siam</option>
+                                          <option value="Chidlom">Chidlom</option>
+                                          <option value="Phrompong">Phrompong</option>
+                                          <option value="Asoke">Asoke</option>
+                                        </select>
+                                        <img src="images/backAndForthicon.png" class = "flex-child"width="20%"/>
+                                         <select class="btn btn-sm animated-button victoria-one">
+                                          <option value="none">---END---</option>
+                                          <option value="siam">Siam</option>
+                                          <option value="Chidlom">Chidlom</option>
+                                          <option value="Phrompong">Phrompong</option>
+                                          <option value="Asoke">Asoke</option>
+                                        </select>
+
+                                    </div>
+                                    <div width="70%">
+                                        <button class="login100-form-btn" onclick="etaSwitch()">SEE ETA</button> 
+                                    </div>
+
+                                    <div class="row" style="margin-top:20px">
+                                      <div class="col-sm-4">
+                                        <a href="passenger-tourist.html"><img src="images/touristinfo.png" width = "100%"/></a>
+                                                <p align="center">tourist attraction</p></div>
+                                      <div class="col-sm-4">
+                                        <a href="passenger-location.html"><img src="images/location.png" width = "100%"/></a>
+                                                <p align="center">Location</p></div>
+                                      <div class="col-sm-4">
+                                        <a href="passenger-report.html"><img src="images/report.png" width = "100%" /></a>
+                                                <p align="center">Report</p>
+                                      </div>
+                                    </div>
+                                    <div width="70%">
+                                        <a class="login100-form-btn" href="index.html" ng-click="passLogout()">LOGOUT</a> 
+                                    </div>
+                            </div>
+                  
+<!--eta-->
+                        <div id="eta" style="display: none">
+                            <div width="70%">
+                                    <button class="login100-form-btn" onclick="etaSwitch2()">back</button>      
+                            </div>
+                        </div>
+
+    
+
+
+<!--facebook-->
+                            <div id="status"></div>
+                            <!-- Facebook login or logout button -->
+                            <a href="javascript:void(0);" onclick="fbLogin()" id="fbLink"><img src="images/fbsignin.png" width="100%"/></a>
+                            <!-- Display user profile data -->
+                            <div id="userData" style="display: none"></div>
+<!--google-->  
+                                <a id ="googlelog"class = "gg" href="passenger-greeting.html" style="display: inline" >
+                                    <button  ng-click="" style="margin-bottom:10px">
+                                    <img src="images/googlesignin.png" width="100%" style="margin-bottom:10px"/>
+                                    </button>
+                                </a>
+<!--admin-->
+                                <a id ="adlog"class ="astext" href="admin-login.html" style="display: inline"/>ADMINISTRATOR LOGIN</a>
+                        {{2+2}} 
+                        </div>   
+                    </div> 
+                </div>
+            </div>
+        </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/lib/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="js/lib/bootstrap.min.js"></script>
+    <!--AngularJS Javascript -->
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/fblogin.js"></script>
+    <script src="js/lib/angular.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--location-->
+    <script src="js/jquery-1.10.1.min.js"></script>
+
+    <script src="js/admin.js"></script>
+
+  
+
+    </body>
+</html>

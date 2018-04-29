@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html ng-app="application">
+    <head>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->  
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->  
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->  
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+   <script>
+window.fbAsyncInit = function() {
+    // FB JavaScript SDK configuration and setup
+    FB.init({
+      appId      : '283104242072222', // FB App ID
+      cookie     : true,  // enable cookies to allow the server to access the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
+    
+    // Check whether the user already logged in
+    FB.getLoginStatus(function(response) {
+        if (response.status === 'connected') {
+            //display user data
+            getFbUserData();
+        }
+    });
+};
+
+
+
+
+
+
+
+
+
+
+// Load the JavaScript SDK asynchronously
+(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src ="https://connect.facebook.net/en_US/sdk.js";
+    
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+// Facebook login with JavaScript SDK
+function fbLogin() {
+    FB.login(function (response) {
+        if (response.authResponse) {
+            // Get and display the user profile data
+            getFbUserData();
+        } else {
+            document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
+        }
+    }, {scope: 'email'});
+}
+
+// Fetch the user profile data from facebook
+function getFbUserData(){
+    FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+    function (response) {
+        document.getElementById('fbLink').setAttribute("onclick","fbLogout()");
+        document.getElementById('fbLink').innerHTML = 'Logout from Facebook';
+        document.getElementById('status').innerHTML = 'Thanks for logging in, ' + response.first_name + '!';
+        document.getElementById('userData').innerHTML = '<p><b>FB ID:</b> '+response.id+'</p><p><b>Name:</b> '+response.first_name+' '+response.last_name+'</p>`<p><b>Email:</b> '+response.email+'</p><p><b>Gender:</b> '+response.gender+'</p><p><b>Locale:</b> '+response.locale+'</p><p><b>Picture:</b> <img src="'+response.picture.data.url+'"/></p><p><b>FB Profile:</b> <a target="_blank" href="'+response.link+'">click to view profile</a></p>';
+         saveUserData(response);
+    });
+}
+function saveUserData(userData){
+    $.post('php/userData.php', {oauth_provider:'facebook',userData: JSON.stringify(userData)}, function(data){ return true; });
+}
+
+// Logout from facebook
+function fbLogout() {
+    FB.logout(function () {
+        document.getElementById('fbLink').setAttribute("onclick","fbLogin()");
+        document.getElementById('fbLink').innerHTML = '<img src="fblogin.png"/>';
+        document.getElementById('userData').innerHTML = '';
+        document.getElementById('status').innerHTML = 'You have successfully logout from Facebook.';
+    });
+}
+</script>
+
+
+    </head>
+    <body>
+        <div class="limiter">
+             <div class="container-login100" style="background-image: url('images/bg.jpg');">
+                <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                    <span class="login100-form-title p-b-53">
+                            TRAINMASTER
+                        </span>
+<!-- passenger login-->
+                       
+                        <div ng-controller="app" >
+                                <div align="center" class="p-b-33" >
+                                    <a href="#" class="btn btn-sm animated-button victoria-one">Start Station</a>
+                                    <img src="images/backAndForthicon.png" class = "flex-child"width="20%"/>
+                                    <a href="#" class="btn btn-sm animated-button victoria-one">Final station</a>
+                                </div>
+                                <div class="container-login100-form-btn m-t-17" align="center" style="margin-bottom:10px">
+                                    <a class="login100-form-btn" ng-click="passHome()" href = "passenger-home.html"> 
+                                    Let's Go
+                                    </a>
+                                </div>
+                                 <div width="70%">
+                                    <a class="login100-form-btn" href="index.html" ng-click="passLogout()">LOGOUT</a> 
+                                </div>
+
+
+                                <div id="userData"></div>
+                        {{2+2}} 
+                        </div>   
+                    </div> 
+                </div>
+            </div>
+        </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/lib/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="js/lib/bootstrap.min.js"></script>
+    <!--AngularJS Javascript -->
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/fblogin.js"></script>
+    <script src="js/lib/angular.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--location-->
+    <script src="js/jquery-1.10.1.min.js"></script>
+
+    </body>
+</html>

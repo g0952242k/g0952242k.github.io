@@ -1,0 +1,218 @@
+<html ng-app="application">
+    <head>
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="eta.ss">
+        <!-- Bootstrap theme -->
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->  
+        <link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->  
+        <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->  
+        <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="css/util.css">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+    </head>
+    <body>
+        <div class="limiter">
+             <div class="container-login100" style="background-image: url('images/bg.jpg');">
+                <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                    <span class="login100-form-title p-b-53">
+                            TRAINMASTER
+                        </span>
+                        <div class="row">
+                            <div class ="col-md-6">
+                                <div id="map"></div>
+                            </div>
+                            <div class ="col-md-6">
+                                <div id="output"></div>
+                            </div>
+                        </div>
+                        <div width="70%">
+                                <a class="login100-form-btn" href="passenger-home.html">back</a> 
+                                
+                        </div>
+                       
+
+    <script src="js/lib/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="js/lib/bootstrap.min.js"></script>
+    <!--AngularJS Javascript -->
+    <script src="js/lib/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/fblogin.js"></script>
+    <script src="js/lib/angular.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/daterangepicker/moment.min.js"></script>
+    <script src="vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+    <script src="vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+    <script src="js/main.js"></script>
+    <!--location-->
+    <script src="js/jquery-1.10.1.min.js"></script>
+
+    <!--eta-->
+    <script src="js/eta.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfVRsXT1MtdugX5o_DSwp4sur7IHkLE7g
+    &callback=initMap"></script>
+  
+    </body>
+</html>
+
+
+
+
+
+
+<style>
+      #right-panel {
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+
+      #right-panel select, #right-panel input {
+        font-size: 15px;
+      }
+
+      #right-panel select {
+        width: 100%;
+      }
+
+      #right-panel i {
+        font-size: 12px;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 60%;
+        width: 100%;
+      }
+      #right-panel {
+        float: right;
+        width: 80%;
+        padding-left: 2%;
+      }
+      #output {
+        font-size: 11px;
+        height: 50%;
+      }
+    </style>
+
+
+
+    <script>
+      
+      function initMap() {
+        var bounds = new google.maps.LatLngBounds;
+        var markersArray = [];
+
+       // var origin1 = {lat: 55.93, lng: -3.118};
+       // var origin2 = 'Greenwich, England';
+       // var destinationA = 'Stockholm, Sweden';
+       // var destinationB = {lat: 50.087, lng: 14.421};
+
+        var origin1 = {lat: 13.746, lng: 100.535}
+        var origin2 = {lat: 13.746, lng: 100.535}
+        var destinationA = {lat: 13.7344685, lng: 100.5660159};
+        var destinationB = {lat: 13.7344685, lng: 100.5660159};
+
+
+
+        var destinationIcon = 'https://chart.googleapis.com/chart?' +
+            'chst=d_map_pin_letter&chld=D|FF0000|000000';
+        var originIcon = 'https://chart.googleapis.com/chart?' +
+            'chst=d_map_pin_letter&chld=O|FFFF00|000000';
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 55.53, lng: 9.4},
+          zoom: 10
+        });
+        var geocoder = new google.maps.Geocoder;
+
+        var service = new google.maps.DistanceMatrixService;
+        service.getDistanceMatrix({
+          origins: [origin1, origin2],
+          destinations: [destinationA, destinationB],
+          travelMode: 'TRANSIT',
+          unitSystem: google.maps.UnitSystem.METRIC,
+          avoidHighways: false,
+          avoidTolls: false
+        }, function(response, status) {
+          if (status !== 'OK') {
+            alert('Error was: ' + status);
+          } else {
+            var originList = response.originAddresses;
+            var destinationList = response.destinationAddresses;
+            var outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = '';
+            deleteMarkers(markersArray);
+
+            var showGeocodedAddressOnMap = function(asDestination) {
+              var icon = asDestination ? destinationIcon : originIcon;
+              return function(results, status) {
+                if (status === 'OK') {
+                  map.fitBounds(bounds.extend(results[0].geometry.location));
+                  markersArray.push(new google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location,
+                    icon: icon
+                  }));
+                } else {
+                  alert('Geocode was not successful due to: ' + status);
+                }
+              };
+            };
+
+            for (var i = 0; i < originList.length; i++) {
+              var results = response.rows[i].elements;
+              geocoder.geocode({'address': originList[i]},
+                  showGeocodedAddressOnMap(false));
+              for (var j = 0; j < results.length; j++) {
+                geocoder.geocode({'address': destinationList[j]},
+                    showGeocodedAddressOnMap(true));
+                outputDiv.innerHTML += originList[i] + ' to ' + destinationList[j] +
+                    ': ' + results[j].distance.text + ' in ' +
+                    results[j].duration.text + '<br>';
+              }
+            }
+          }
+        });
+      }
+
+      function deleteMarkers(markersArray) {
+        for (var i = 0; i < markersArray.length; i++) {
+          markersArray[i].setMap(null);
+        }
+        markersArray = [];
+      }
+    </script>
